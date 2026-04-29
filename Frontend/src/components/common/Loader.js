@@ -67,9 +67,11 @@ export const CardSkeleton = () => {
   );
 };
 
-export default {
+const Loader = {
   PageLoader,
   SectionLoader,
   ButtonLoader,
   CardSkeleton,
 };
+
+export default Loader;

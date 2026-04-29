@@ -165,7 +165,7 @@ export const getDueDateInfo = (dateString, isCompleted = false) => {
   return { label: formatDate(dateString, 'smart'), color: 'default' };
 };
 
-export default {
+const dateUtils = {
   formatDate,
   parseDate,
   getRelativeTime,
@@ -175,3 +175,5 @@ export default {
   STORAGE_FORMAT,
   DISPLAY_FORMATS,
 };
+
+export default dateUtils;

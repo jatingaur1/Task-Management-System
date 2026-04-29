@@ -4,7 +4,7 @@ import { FilterOutlined, CalendarOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { STORAGE_FORMAT } from '../../utils/dateUtils';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const FilterTodoModal = ({ listData = [], submitted, trigger }) => {
   const [form] = Form.useForm();

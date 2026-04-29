@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown, Space, Typography, Avatar, Tooltip } from 'antd';
+import { Dropdown, Space, Typography, Avatar, Tooltip } from 'antd';
 import { 
   LogoutOutlined, 
   SunOutlined, 
