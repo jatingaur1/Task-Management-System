@@ -20,7 +20,7 @@
 
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 /**
  * ==========================================================
