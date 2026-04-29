@@ -221,7 +221,7 @@ tasknova/
 Add screenshots here after uploading images.
 
 ```md
-![Dashboard](Screenshots/1.png)
+![Dashboard](Screenshots/Addtask.png)
 ![Dark Mode](Screenshots/2.png)
 ![Login](Screenshots/3.png)
 ```
