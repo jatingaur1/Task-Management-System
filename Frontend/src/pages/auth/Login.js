@@ -49,9 +49,9 @@ const Login = () => {
       <div className="auth-content">
         <div className="auth-card fade-in">
           <div className="auth-header">
-            <img src="/main-logo.png" alt="TaskFlow" className="auth-logo" />
+            <img src="/main-logo.png" alt="TaskNova" className="auth-logo" />
             <Title level={3} className="auth-title">Welcome Back!</Title>
-            <Text className="auth-subtitle">Sign in to continue to TaskFlow</Text>
+            <Text className="auth-subtitle">Sign in to continue to TaskNova</Text>
           </div>
 
           <Form

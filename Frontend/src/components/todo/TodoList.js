@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { 
-  Table, 
-  Checkbox, 
-  Space, 
-  Typography, 
-  Button, 
+import {
+  Table,
+  Checkbox,
+  Space,
+  Typography,
+  Button,
   Tag,
   Tooltip,
   Input,
   App
 } from 'antd';
-import { 
-  PlusOutlined, 
-  FilterOutlined, 
+import {
+  PlusOutlined,
+  FilterOutlined,
   FilePdfOutlined,
   SearchOutlined,
   ReloadOutlined
@@ -68,7 +68,7 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
   const getDisplayData = () => {
     let data = filteredTodos || todos;
     if (searchText) {
-      data = data.filter(todo => 
+      data = data.filter(todo =>
         todo.text.toLowerCase().includes(searchText.toLowerCase())
       );
     }
@@ -102,9 +102,9 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
       key: 'text',
       render: (text, record) => (
         <div>
-          <Text 
+          <Text
             delete={record.checked}
-            style={{ 
+            style={{
               color: record.checked ? 'var(--text-muted)' : 'var(--text-primary)',
               fontSize: '0.95rem'
             }}
@@ -112,7 +112,23 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
             {text}
           </Text>
           <div style={{ marginTop: 4 }}>
-            {getStatusTag(record)}
+            <Space wrap>
+              {getStatusTag(record)}
+
+              <Tag color={
+                record.priority === 'High'
+                  ? 'red'
+                  : record.priority === 'Medium'
+                    ? 'orange'
+                    : 'green'
+              }>
+                {record.priority}
+              </Tag>
+
+              <Tag color="blue">
+                {record.category}
+              </Tag>
+            </Space>
           </div>
         </div>
       ),
@@ -157,17 +173,17 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
             allowClear
           />
           <Tooltip title="Refresh">
-            <Button 
-              icon={<ReloadOutlined />} 
+            <Button
+              icon={<ReloadOutlined />}
               onClick={onRefresh}
               loading={loading}
             />
           </Tooltip>
         </Space>
-        
+
         <Space wrap className="todo-actions">
-          <FilterTodoModal 
-            listData={todos} 
+          <FilterTodoModal
+            listData={todos}
             submitted={handleFilterSubmit}
             trigger={
               <Button icon={<FilterOutlined />}>
@@ -175,7 +191,7 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
               </Button>
             }
           />
-          <PDFDownloader 
+          <PDFDownloader
             TableData={todos}
             trigger={
               <Button icon={<FilePdfOutlined />}>
@@ -183,7 +199,7 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
               </Button>
             }
           />
-          <CreateTodoModal 
+          <CreateTodoModal
             submitted={handleModalSubmit}
             trigger={
               <Button type="primary" icon={<PlusOutlined />}>
@@ -221,8 +237,8 @@ const TodoList = ({ todos = [], loading = false, onRefresh }) => {
 
       {/* Footer Stats */}
       {displayData.length > 0 && (
-        <div style={{ 
-          padding: '16px 24px', 
+        <div style={{
+          padding: '16px 24px',
           borderTop: '1px solid var(--border-color)',
           display: 'flex',
           justifyContent: 'space-between',

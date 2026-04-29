@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Form, Input, DatePicker, Button, Space, Typography, Tooltip, App } from 'antd';
+import { Modal, Form, Input, DatePicker, Button, Space, Typography, Tooltip, App, Select } from 'antd';
 import { EditOutlined, CalendarOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import TodoListService from '../../utils/TodoListService/TodoListService';
@@ -7,6 +7,7 @@ import { STORAGE_FORMAT, parseDate } from '../../utils/dateUtils';
 
 const { Title } = Typography;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const UpdateTodoModal = ({ rowData, submitted }) => {
   const [form] = Form.useForm();
@@ -19,6 +20,8 @@ const UpdateTodoModal = ({ rowData, submitted }) => {
       form.setFieldsValue({
         text: rowData.text,
         time: parseDate(rowData.time),
+        priority: rowData.priority,
+        category: rowData.category
       });
     }
   }, [visible, rowData, form]);
@@ -36,9 +39,9 @@ const UpdateTodoModal = ({ rowData, submitted }) => {
         ...values,
         time: dayjs(values.time).format(STORAGE_FORMAT),
       };
-      
+
       const result = await TodoListService.UpdateTodo(submitData, rowData.id);
-      
+
       if (result) {
         message.success('Task updated successfully!');
         submitted?.(true);
@@ -114,14 +117,40 @@ const UpdateTodoModal = ({ rowData, submitted }) => {
             />
           </Form.Item>
 
+          <Form.Item
+            name="priority"
+            label="Priority"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Option value="Low">Low</Option>
+              <Option value="Medium">Medium</Option>
+              <Option value="High">High</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="category"
+            label="Category"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Option value="Work">Work</Option>
+              <Option value="Study">Study</Option>
+              <Option value="Personal">Personal</Option>
+              <Option value="Health">Health</Option>
+            </Select>
+          </Form.Item>
+
+
           <Form.Item style={{ marginBottom: 0, marginTop: 32 }}>
             <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
               <Button onClick={handleClose} size="large">
                 Cancel
               </Button>
-              <Button 
-                type="primary" 
-                htmlType="submit" 
+              <Button
+                type="primary"
+                htmlType="submit"
                 loading={loading}
                 size="large"
                 style={{ background: 'var(--success)' }}

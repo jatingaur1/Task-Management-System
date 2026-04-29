@@ -65,9 +65,9 @@ const Register = () => {
       <div className="auth-content">
         <div className="auth-card fade-in">
           <div className="auth-header">
-            <img src="/main-logo.png" alt="TaskFlow" className="auth-logo" />
+            <img src="/main-logo.png" alt="TaskNova" className="auth-logo" />
             <Title level={3} className="auth-title">Create Account</Title>
-            <Text className="auth-subtitle">Get started with TaskFlow today</Text>
+            <Text className="auth-subtitle">Get started with TaskNova today</Text>
           </div>
 
           <Form

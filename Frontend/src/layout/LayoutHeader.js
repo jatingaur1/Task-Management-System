@@ -55,8 +55,8 @@ const LayoutHeader = () => {
       <div className="header-content">
         <div className="header-left">
           <div className="header-logo">
-            <img src="/main-logo.png" alt="TaskFlow" />
-            <h1>TaskFlow</h1>
+            <img src="/main-logo.png" alt="TaskNova" />
+            <h1>TaskNova</h1>
           </div>
         </div>
 

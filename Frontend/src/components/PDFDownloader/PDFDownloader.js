@@ -120,7 +120,7 @@ function PDFDownloader({ TableData, trigger }) {
         <Page size="A4" style={styles.page}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.title}>TaskFlow - Task Report</Text>
+            <Text style={styles.title}>TaskNova - Task Report</Text>
             <Text style={styles.subtitle}>
               Generated on {dayjs().format('MMMM DD, YYYY [at] HH:mm')}
             </Text>
@@ -174,7 +174,7 @@ function PDFDownloader({ TableData, trigger }) {
                     styles.cellText, 
                     row.checked ? styles.statusCompleted : styles.statusPending
                   ]}>
-                    {row.checked ? '✓ Completed' : '○ Pending'}
+                    {row.checked ? ' Completed' : ' Pending'}
                   </Text>
                 </View>
               </View>
@@ -192,7 +192,7 @@ function PDFDownloader({ TableData, trigger }) {
     );
   };
 
-  const fileName = `TaskFlow_Report_${dayjs().format('YYYY-MM-DD')}.pdf`;
+  const fileName = `TaskNova_Report_${dayjs().format('YYYY-MM-DD')}.pdf`;
 
   return (
     <PDFDownloadLink document={<TaskDocument />} fileName={fileName}>

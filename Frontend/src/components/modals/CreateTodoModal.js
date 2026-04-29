@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, DatePicker, Button, Space, Typography, App } from 'antd';
+import { Modal, Form, Input, DatePicker, Button, Space, Typography, App, Select } from 'antd';
 import { PlusOutlined, CalendarOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import TodoListService from '../../utils/TodoListService/TodoListService';
@@ -7,6 +7,7 @@ import { STORAGE_FORMAT } from '../../utils/dateUtils';
 
 const { Title } = Typography;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const CreateTodoModal = ({ submitted, trigger }) => {
   const [form] = Form.useForm();
@@ -27,9 +28,9 @@ const CreateTodoModal = ({ submitted, trigger }) => {
         ...values,
         time: dayjs(values.time).format(STORAGE_FORMAT),
       };
-      
+
       const result = await TodoListService.CreateTodo(submitData);
-      
+
       if (result) {
         message.success('Task created successfully!');
         submitted?.(true);
@@ -45,9 +46,9 @@ const CreateTodoModal = ({ submitted, trigger }) => {
   const TriggerButton = trigger ? (
     React.cloneElement(trigger, { onClick: handleOpen, className: 'create-todo-btn' })
   ) : (
-    <Button 
-      type="primary" 
-      icon={<PlusOutlined />} 
+    <Button
+      type="primary"
+      icon={<PlusOutlined />}
       onClick={handleOpen}
       className="create-todo-btn"
     >
@@ -111,14 +112,41 @@ const CreateTodoModal = ({ submitted, trigger }) => {
             />
           </Form.Item>
 
+          <Form.Item
+            name="priority"
+            label="Priority"
+            initialValue="Medium"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Option value="Low">Low</Option>
+              <Option value="Medium">Medium</Option>
+              <Option value="High">High</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="category"
+            label="Category"
+            initialValue="Personal"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Option value="Work">Work</Option>
+              <Option value="Study">Study</Option>
+              <Option value="Personal">Personal</Option>
+              <Option value="Health">Health</Option>
+            </Select>
+          </Form.Item>
+
           <Form.Item style={{ marginBottom: 0, marginTop: 32 }}>
             <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
               <Button onClick={handleClose} size="large">
                 Cancel
               </Button>
-              <Button 
-                type="primary" 
-                htmlType="submit" 
+              <Button
+                type="primary"
+                htmlType="submit"
                 loading={loading}
                 size="large"
               >

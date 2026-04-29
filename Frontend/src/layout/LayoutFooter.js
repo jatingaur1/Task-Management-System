@@ -16,14 +16,14 @@ const LayoutFooter = () => {
           </Text>
           <Space split={<Text type="secondary">•</Text>}>
             <Link 
-              href="https://github.com/shehari007/todo-web-app" 
+              href="https://github.com/jatingaur1" 
               target="_blank"
               className="footer-link"
             >
               <GithubOutlined /> View on GitHub
             </Link>
             <Text className="footer-text">
-              © {currentYear} TaskFlow
+              © {currentYear} TaskNova
             </Text>
           </Space>
         </Space>
