@@ -252,18 +252,17 @@ tasknova/
 
 # 🌐 Deployment
 
-You can deploy:
+Deployed:
 
 ## Frontend
 
-* Vercel
-* Netlify
+* Frontend
+Vercel ✔ https://task-management-system-silk-alpha.vercel.app
 
 ## Backend
 
 * Render
-* Railway
-* Vercel Serverless
+Render ✔ https://task-management-system-backend-4t2w.onrender.com
 
 ## Database
 
