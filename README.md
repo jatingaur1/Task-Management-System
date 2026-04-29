@@ -218,15 +218,37 @@ tasknova/
 
 # 📸 Screenshots
 
-Add screenshots here after uploading images.
+## 🧩 Dashboard & Main UI
 
-```md
-![Dashboard](Screenshots/Addtask.png)
-![Dark Mode](Screenshots/2.png)
-![Login](Screenshots/3.png)
-```
+![Dashboard](./Screenshots/Dashboard.png)
+![Demo Dashboard](./Screenshots/Demodashboard.png)
 
 ---
+
+## ➕ Task Management
+
+![Add Task](./Screenshots/Addtask.png)
+![Create Task](./Screenshots/CreateTask.png)
+
+---
+
+## 🔍 Filtering & Search
+
+![Filter](./Screenshots/Filter.png)
+
+---
+
+## 🔐 Authentication
+
+![Login Page](./Screenshots/Loginpage.png)
+![Signup Dark](./Screenshots/SignupPagedark.png)
+![Signup Light](./Screenshots/SignupPagelight.png)
+
+---
+
+## 📄 Reports
+
+![Task PDF Report](./Screenshots/Taskpdfreport.png)
 
 # 🌐 Deployment
 
