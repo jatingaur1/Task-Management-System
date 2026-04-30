@@ -1,20 +1,17 @@
 /**
  * ==========================================================
- * TaskNova - Database Setup & Seed Script
+ * TaskNova - Database Setup & Seed Script (PRODUCTION READY)
  * ==========================================================
  *
- * This script will:
- * 1. Create PostgreSQL database if it does not exist
- * 2. Connect to database
- * 3. Create / update tables
- * 4. Seed demo user
- * 5. Seed sample tasks
+ * Works for:
+ * ✅ Local PostgreSQL
+ * ✅ Cloud PostgreSQL (SSL required)
  *
- * Run Command:
+ * Run:
  * npm run db:setup
  *
- * Make sure .env contains:
- * SEQ_CONNECTION=postgres://username:password@localhost:5432/tasknova
+ * Make sure:
+ * SEQ_CONNECTION=postgresql://username:password@host:5432/dbname
  * ==========================================================
  */
 
@@ -25,8 +22,6 @@ const bcrypt = require('bcryptjs');
 /**
  * ==========================================================
  * Parse PostgreSQL connection string
- * Example:
- * postgres://postgres:1234@localhost:5432/tasknova
  * ==========================================================
  */
 function parseConnectionString(connectionString) {
@@ -43,12 +38,25 @@ function parseConnectionString(connectionString) {
 
 /**
  * ==========================================================
- * Create database if not exists
- * Connects first to default "postgres" database
+ * Create database if not exists (LOCAL ONLY)
+ * ⚠️ Skipped automatically for cloud DBs
  * ==========================================================
  */
 async function createDatabaseIfNotExists() {
-  const config = parseConnectionString(process.env.SEQ_CONNECTION);
+  const connectionString = process.env.SEQ_CONNECTION;
+
+  // Skip for cloud DB (they don’t allow CREATE DATABASE)
+  if (
+    connectionString.includes('render.com') ||
+    connectionString.includes('supabase.co') ||
+    connectionString.includes('neon.tech') ||
+    connectionString.includes('railway.app')
+  ) {
+    console.log('☁️ Cloud DB detected → Skipping DB creation\n');
+    return;
+  }
+
+  const config = parseConnectionString(connectionString);
 
   const adminSequelize = new Sequelize({
     host: config.host,
@@ -75,7 +83,6 @@ async function createDatabaseIfNotExists() {
     } else {
       console.log(`ℹ️ Database "${config.database}" already exists.\n`);
     }
-
   } finally {
     await adminSequelize.close();
   }
@@ -92,14 +99,10 @@ let Todo;
 
 /**
  * ==========================================================
- * Define Sequelize Models
+ * Define Models
  * ==========================================================
  */
 function defineModels() {
-
-  /**
-   * User Table
-   */
   User = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
@@ -112,9 +115,6 @@ function defineModels() {
     },
   });
 
-  /**
-   * Todo Table
-   */
   Todo = sequelize.define('todo', {
     user_id: {
       type: DataTypes.INTEGER,
@@ -142,9 +142,6 @@ function defineModels() {
     },
   });
 
-  /**
-   * Relationships
-   */
   User.hasMany(Todo, { foreignKey: 'user_id' });
   Todo.belongsTo(User, { foreignKey: 'user_id' });
 }
@@ -160,21 +157,13 @@ async function hashPassword(password) {
 
 /**
  * ==========================================================
- * Seed Users
+ * Seed Data
  * ==========================================================
  */
 const seedUsers = [
-  {
-    username: 'demo',
-    password: 'demo123',
-  },
+  { username: 'demo', password: 'demo123' },
 ];
 
-/**
- * ==========================================================
- * Seed Sample Tasks
- * ==========================================================
- */
 const seedTodos = [
   {
     text: 'Welcome to TaskNova',
@@ -199,49 +188,40 @@ const seedTodos = [
  */
 async function setupDatabase() {
   try {
-
     console.log('🔌 Checking database...');
     await createDatabaseIfNotExists();
 
     /**
-     * Connect to target DB
+     * ✅ MAIN FIX: SSL ENABLED HERE
      */
     sequelize = new Sequelize(process.env.SEQ_CONNECTION, {
       dialect: 'postgres',
       dialectModule: require('pg'),
       logging: false,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     });
 
-    /**
-     * Load models
-     */
     defineModels();
 
-    /**
-     * Test connection
-     */
     console.log('🔌 Connecting...');
     await sequelize.authenticate();
     console.log('✅ Connected successfully!\n');
 
-    /**
-     * Sync tables
-     */
     console.log('📦 Syncing tables...');
     await sequelize.sync({ alter: true });
     console.log('✅ Tables synced successfully!\n');
 
-    /**
-     * Check existing users
-     */
     const count = await User.count();
 
     if (count === 0) {
-
       console.log('🌱 Seeding demo data...');
 
       for (const item of seedUsers) {
-
         const user = await User.create({
           username: item.username,
           password: await hashPassword(item.password),
@@ -256,46 +236,24 @@ async function setupDatabase() {
       }
 
       console.log('✅ Demo data inserted successfully!\n');
-
     } else {
       console.log(`ℹ️ ${count} user(s) already exist. Seed skipped.\n`);
     }
 
-    /**
-     * Display login credentials
-     */
     console.log('══════════════════════════════════════');
     console.log('🔑 DEMO LOGIN');
-    console.log('══════════════════════════════════════');
     console.log('Username: demo');
     console.log('Password: demo123');
     console.log('══════════════════════════════════════\n');
 
-    /**
-     * Show tables
-     */
-    const tables = await sequelize.getQueryInterface().showAllTables();
-
-    console.log('📊 Tables:');
-    tables.forEach(table => console.log(`- ${table}`));
-
-    console.log('\n🎉 TaskNova setup complete!');
-
+    console.log('🎉 TaskNova setup complete!');
   } catch (err) {
-
-    console.log('\n❌ Error:', err.message);
-
-    if (err.message.includes('ECONNREFUSED')) {
-      console.log('💡 PostgreSQL server is not running.');
-    }
-
+    console.error('\n❌ Error:', err.message);
   } finally {
-
     if (sequelize) {
       await sequelize.close();
       console.log('\n🔌 Database connection closed.');
     }
-
   }
 }
 
