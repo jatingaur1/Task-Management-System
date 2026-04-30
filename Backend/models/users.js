@@ -1,6 +1,15 @@
 const { Sequelize, DataTypes } = require('sequelize');
+
 const sequelize = new Sequelize(process.env.SEQ_CONNECTION, {
-  dialectModule: require('pg')
+  dialect: 'postgres',
+  dialectModule: require('pg'),
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+  logging: false,
 });
 
 const User = sequelize.define('user', {
