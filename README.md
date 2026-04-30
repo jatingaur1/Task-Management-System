@@ -12,7 +12,7 @@
 
 Manage tasks efficiently with authentication, priorities, categories, analytics, PDF export, and a clean responsive UI.
 
-**Live Demo Coming Soon** • **Portfolio Ready** • **Open Source**
+**Live Demo ** • **Portfolio Ready** • **Open Source**
 
 </div>
 
@@ -266,9 +266,7 @@ Render ✔ https://task-management-system-backend-4t2w.onrender.com
 
 ## Database
 
-* Supabase PostgreSQL
-* Railway PostgreSQL
-* Neon DB
+* PostgreSQL (Render Cloud)
 
 ---
 
