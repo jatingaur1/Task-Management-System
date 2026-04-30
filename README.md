@@ -12,7 +12,8 @@
 
 Manage tasks efficiently with authentication, priorities, categories, analytics, PDF export, and a clean responsive UI.
 
-**Live Demo ** • **Portfolio Ready** • **Open Source**
+👉 **Live Demo:** https://task-management-system-silk-alpha.vercel.app
+💼 **Portfolio Ready** • 🌍 **Deployed** • 📦 **Open Source**
 
 </div>
 
@@ -39,7 +40,7 @@ Manage tasks efficiently with authentication, priorities, categories, analytics,
 
 | Feature               | Description                        |
 | --------------------- | ---------------------------------- |
-| 🛡️ Rate Limiting     | Prevents brute-force abuse         |
+| 🛡️ Rate Limiting     | Prevents brute-force attacks       |
 | 🔒 Password Hashing   | Secure passwords using bcrypt      |
 | 🎫 JWT Tokens         | Token-based authentication         |
 | 🌐 CORS Protection    | Controlled frontend/backend access |
@@ -63,12 +64,24 @@ Manage tasks efficiently with authentication, priorities, categories, analytics,
 * Node.js
 * Express.js
 * Sequelize ORM
-* JWT
+* JWT Authentication
 * bcrypt
 
 ## Database
 
-* PostgreSQL
+* PostgreSQL (Cloud)
+
+---
+
+# 🧠 Architecture
+
+```txt
+React (Frontend - Vercel)
+        ↓
+Express API (Backend - Render)
+        ↓
+PostgreSQL (Cloud Database)
+```
 
 ---
 
@@ -76,37 +89,33 @@ Manage tasks efficiently with authentication, priorities, categories, analytics,
 
 ## Auth
 
-| Method | Endpoint             |
-| ------ | -------------------- |
-| POST   | `/api/auth/register` |
-| POST   | `/api/auth/login`    |
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/auth/register |
+| POST   | /api/auth/login    |
 
 ## Todos
 
-| Method | Endpoint               |
-| ------ | ---------------------- |
-| GET    | `/api/todos`           |
-| GET    | `/api/todos/:id`       |
-| POST   | `/api/todos`           |
-| PUT    | `/api/todos/:id`       |
-| PATCH  | `/api/todos/:id/check` |
-| DELETE | `/api/todos/:id`       |
+| Method | Endpoint             |
+| ------ | -------------------- |
+| GET    | /api/todos           |
+| GET    | /api/todos/:id       |
+| POST   | /api/todos           |
+| PUT    | /api/todos/:id       |
+| PATCH  | /api/todos/:id/check |
+| DELETE | /api/todos/:id       |
 
 ---
 
 # 🚀 Getting Started
 
-# Prerequisites
-
-Install:
+## Prerequisites
 
 * Node.js
 * PostgreSQL
 * npm
 
 ---
-
-# Installation
 
 ## 1️⃣ Clone Repository
 
@@ -124,7 +133,7 @@ cd Server
 npm install
 ```
 
-Create `.env`
+Create `.env`:
 
 ```env
 PORT=8000
@@ -146,7 +155,7 @@ This will:
 
 * Create database
 * Create tables
-* Add demo user
+* Insert demo user
 * Add sample tasks
 
 ---
@@ -159,15 +168,13 @@ npm start
 
 Backend runs on:
 
-```txt
+```
 http://localhost:8000
 ```
 
 ---
 
 ## 5️⃣ Frontend Setup
-
-Open new terminal:
 
 ```bash
 cd Frontend
@@ -177,7 +184,7 @@ npm start
 
 Frontend runs on:
 
-```txt
+```
 http://localhost:3000
 ```
 
@@ -250,19 +257,19 @@ tasknova/
 
 ![Task PDF Report](./Screenshots/Taskpdfreport.png)
 
-# 🌐 Deployment
+---
 
-Deployed:
+# 🌐 Deployment
 
 ## Frontend
 
-* Frontend
-Vercel ✔ https://task-management-system-silk-alpha.vercel.app
+* Vercel
+  👉 https://task-management-system-silk-alpha.vercel.app
 
 ## Backend
 
 * Render
-Render ✔ https://task-management-system-backend-4t2w.onrender.com
+  👉 https://task-management-system-backend-4t2w.onrender.com
 
 ## Database
 
@@ -270,20 +277,30 @@ Render ✔ https://task-management-system-backend-4t2w.onrender.com
 
 ---
 
+# ⚡ Challenges & Learnings
+
+* Resolved SSL connection issues with PostgreSQL in production
+* Fixed CORS errors between frontend and backend deployments
+* Debugged environment variable mismatches in production
+* Learned difference between local and cloud databases
+* Handled deployment issues across multiple platforms
+
+---
+
 # 🚀 Future Improvements
 
-* Notifications
-* Drag & Drop Tasks
-* Calendar View
-* Team Collaboration
-* Cloud Sync
-* AI Task Suggestions
+* Notifications system
+* Drag & Drop task management
+* Calendar integration
+* Team collaboration features
+* Cloud sync across devices
+* AI-based task suggestions
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome!
 
 ```bash
 git fork
@@ -293,7 +310,7 @@ git commit -m "Added feature"
 git push origin feature-name
 ```
 
-Then open Pull Request.
+Then open a Pull Request.
 
 ---
 
